@@ -11,7 +11,7 @@ contract WorldCoinVerification {
     using ByteHasher for bytes;
 
     /// @notice Emitted when a profile is verified
-    /// @param profileId The ID of the profile getting verified
+    /// @param profileAddress The ID of the profile getting verified
     event ProfileVerified(address indexed profileAddress);
 
     /// @notice Emitted when a profileAddress is unverified
@@ -71,7 +71,7 @@ contract WorldCoinVerification {
         }*/
 
         require(
-            nullifierHashes[nullifierHash] == 0,
+            nullifierHashes[nullifierHash] == address(0),
             "WorldCoinVerification: World id user has already verified the farcaster");
 
         isVerified[profileAddress] = true;
