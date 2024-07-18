@@ -4,27 +4,29 @@ import { VerificationLevel, IDKitWidget } from '@worldcoin/idkit';
 import { WORLDCOIN_APP_ID } from '../settings';
 import { useAccount } from 'wagmi';
 import Button from "react-bootstrap/Button";
+import useVerifyProof from "../hooks/UseVerifyProof";
 
 function Verify() {
   const [loading, setLoading] = useState(false);
   const { address } = useAccount();
+  const { verifyProof } = useVerifyProof();
 
   const onSuccess = async (result: any) => {
     console.log('nullifier_hash', result.nullifier_hash);
+    console.log('danarhceni', result)
     setLoading(true);
-    // try {
-    //   await verifyProof(result, selectedCandidate);
-    // } catch (e) {
-    //   console.error(e);
-    //   if (e instanceof Error) {
-    //     if (e.message.includes('Error: InvalidNullifier()')) {
-    //       alert('You have already voted for this candidate');
-    //     } else alert(e.message);
-    //   } else alert(e);
-    // } finally {
-    //   setLoading(false);
-    //   await refetch();
-    // }
+    try {
+      await verifyProof(result);
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) {
+        if (e.message.includes('Error: InvalidNullifier()')) {
+          alert('You have already voted for this candidate');
+        } else alert(e.message);
+      } else alert(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

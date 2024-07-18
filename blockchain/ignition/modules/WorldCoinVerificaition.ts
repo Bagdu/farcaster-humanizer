@@ -1,17 +1,14 @@
 import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 
-const JAN_1ST_2030 = 1893456000;
-const ONE_GWEI: bigint = 1_000_000_000n;
+const WorldCoinVerification = buildModule("WorldCoinVerification", (m) => {
+    const _appId = m.getParameter("_appId", "app_91f5f4e6097f3a9b2d9f544ee77ede26");
+    const _action = m.getParameter("_action", "verify-human");
+    const _worldIdAddress = m.getParameter("_worldIdAddress", "0x11cA3127182f7583EfC416a8771BD4d11Fae4334");
 
-const LockModule = buildModule("LockModule", (m) => {
-  const unlockTime = m.getParameter("unlockTime", JAN_1ST_2030);
-  const lockedAmount = m.getParameter("lockedAmount", ONE_GWEI);
 
-  const lock = m.contract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
+    const worldCoinVerification = m.contract("WorldCoinVerification", [_worldIdAddress, _appId, _action]);
 
-  return { lock };
+    return { worldCoinVerification };
 });
 
-export default LockModule;
+export default WorldCoinVerification;
