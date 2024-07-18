@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import { Route, Routes } from 'react-router-dom';
-import Vote from './pages/Vote';
+import Verify from './pages/Verify';
 import { useAccount, useNetwork } from 'wagmi';
 import { DEFAULT_CHAIN } from './settings';
 
@@ -23,7 +23,7 @@ function App() {
               </div>
             ) : (
               <Routes>
-                <Route path="*" element={<Vote />} />
+                <Route path="*" element={<Verify />} />
               </Routes>
             )
           ) : (

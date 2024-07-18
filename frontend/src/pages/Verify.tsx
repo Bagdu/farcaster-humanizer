@@ -5,7 +5,7 @@ import { WORLDCOIN_APP_ID } from '../settings';
 import { useAccount } from 'wagmi';
 import Button from "react-bootstrap/Button";
 
-function Vote() {
+function Verify() {
   const [loading, setLoading] = useState(false);
   const { address } = useAccount();
 
@@ -56,4 +56,4 @@ function Vote() {
   );
 }
 
-export default Vote;
+export default Verify;

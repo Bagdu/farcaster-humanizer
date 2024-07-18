@@ -24,8 +24,8 @@ You need to have Optimism Goerli network in your Metamask extension.
 
 ## Voting
 1. Connect your Metamask wallet to the app. 
-2. Go to Vote page.
-3. Choose your candidate and click `Vote` button.
+2. Go to Verify page.
+3. Choose your candidate and click `Verify` button.
 4. Scan QR code with the help of WorldCoin [Simulator](https://simulator.worldcoin.org/) on your mobile device.
 5. Confirm transaction in Metamask.
 
