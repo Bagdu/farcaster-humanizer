@@ -53,7 +53,7 @@ contract WorldCoinVerification {
         uint256 root,
         uint256 nullifierHash,
         uint256[8] calldata proof
-    ) public payable {
+    ) public {
         worldId.verifyProof(
             root,
             groupId,
