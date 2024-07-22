@@ -6,7 +6,7 @@ function Header() {
     <Navbar expand="md" bg="primary" variant="dark">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          <Image src="/images/logo-small.png" height={28} className="me-2" />
+          {/*<Image src="/images/logo-small.png" height={28} className="me-2" />*/}
           Farcaster humanizer
         </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
