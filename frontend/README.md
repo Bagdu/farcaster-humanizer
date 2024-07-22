@@ -1,4 +1,4 @@
-# WorldWote frontend
+# Farcaster humanizer frontend
 
 ## Requirements
 - node.js v18.18.2
