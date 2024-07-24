@@ -12,8 +12,6 @@ function Verify() {
   const { verifyProof } = useVerifyProof();
 
   const onSuccess = async (result: any) => {
-    console.log('nullifier_hash', result.nullifier_hash);
-    console.log('danarhceni', result)
     setLoading(true);
     try {
       await verifyProof(result);
