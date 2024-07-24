@@ -1,7 +1,7 @@
-import { readContract, prepareWriteContract, waitForTransaction, writeContract } from '@wagmi/core';
-import { abis, addresses } from '../contracts';
-import { decodeAbiParameters } from 'viem';
-import { useAccount } from "wagmi";
+import {prepareWriteContract, readContract, waitForTransaction, writeContract} from '@wagmi/core';
+import {abis, addresses} from '../contracts';
+import {decodeAbiParameters} from 'viem';
+import {useAccount} from "wagmi";
 
 function useVerifyProof() {
   const {address} = useAccount();
@@ -23,7 +23,17 @@ function useVerifyProof() {
     await waitForTransaction({ hash });
   };
 
-  return { verifyProof };
+  const checkVerifyProof = async (address: string) => {
+
+    return await readContract({
+      address: addresses.verify,
+      abi: abis.verify,
+      functionName: 'isVerified',
+      args: [address]
+    });
+  };
+
+  return { verifyProof, checkVerifyProof };
 }
 
 export default useVerifyProof;

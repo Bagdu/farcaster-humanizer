@@ -8,8 +8,28 @@ import useVerifyProof from "../hooks/UseVerifyProof";
 
 function Verify() {
   const [loading, setLoading] = useState(false);
+  const [checkAddress, setCheckAddress] = useState("")
+
   const { address } = useAccount();
-  const { verifyProof } = useVerifyProof();
+  const { verifyProof, checkVerifyProof } = useVerifyProof();
+
+  const checkVerification = async () => {
+    try {
+      const result = await checkVerifyProof(checkAddress);
+      if (result) {
+        alert(`Your address ${address} has been verified`)
+      } else{
+        alert(`Your address ${address} has not been verified`)
+      }
+    } catch (e) {
+      console.error(e);
+      if (e instanceof Error) {
+        if (e.message.includes('Error: InvalidNullifier()')) {
+          alert('You have already voted for this candidate');
+        } else alert(e.message);
+      } else alert(e);
+    }
+  }
 
   const onSuccess = async (result: any) => {
     setLoading(true);
@@ -52,8 +72,32 @@ function Verify() {
           <p>Please wait while your vote is being processed</p>
         </Modal.Body>
       </Modal>
+
+      <div>
+        <input
+          style={styles.input}
+          value={checkAddress}
+          type="text"
+          onChange={e => setCheckAddress(e.target.value)}
+        />
+        <Button
+          onClick={checkVerification}
+        >
+          Check Address
+        </Button>
+
+      </div>
     </>
   );
 }
 
 export default Verify;
+
+const styles = ({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+});
