@@ -6,7 +6,7 @@ import { useAccount } from 'wagmi';
 import Button from "react-bootstrap/Button";
 import useVerifyProof from "../hooks/UseVerifyProof";
 
-function Verify() {
+export function Verify() {
   const [loading, setLoading] = useState(false);
   const [checkAddress, setCheckAddress] = useState("")
 

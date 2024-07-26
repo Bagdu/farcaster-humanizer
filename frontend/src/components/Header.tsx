@@ -9,17 +9,6 @@ function Header() {
           {/*<Image src="/images/logo-small.png" height={28} className="me-2" />*/}
           Farcaster humanizer
         </Navbar.Brand>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/vote">
-              Vote
-            </Nav.Link>
-            <Nav.Link as={Link} to="/results">
-              Results
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-
         <div className="ms-auto">
           <w3m-button />
         </div>

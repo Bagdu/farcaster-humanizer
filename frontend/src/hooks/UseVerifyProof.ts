@@ -3,7 +3,7 @@ import {abis, addresses} from '../contracts';
 import {decodeAbiParameters} from 'viem';
 import {useAccount} from "wagmi";
 
-function useVerifyProof() {
+export function useVerifyProof() {
   const {address} = useAccount();
   const verifyProof = async (result: any) => {
     const signal = address;
