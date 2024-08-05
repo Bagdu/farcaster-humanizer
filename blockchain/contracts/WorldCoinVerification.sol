@@ -12,7 +12,7 @@ contract WorldCoinVerification {
 
     /// @notice Emitted when a profile is verified
     /// @param profileAddress The ID of the profile getting verified
-    event ProfileVerified(address indexed profileAddress);
+    event ProfileVerified(string indexed appId, address indexed profileAddress);
 
     /// @notice Emitted when a profileAddress is unverified
     /// @param profileAddress The ID of the profile no longer verified
@@ -28,10 +28,10 @@ contract WorldCoinVerification {
     uint256 internal immutable externalNullifierHash;
 
     /// @notice Whether a profile address is verified
-    mapping(address => bool) public isVerified;
+    mapping(string => mapping(address => bool)) public isVerified;
 
     /// @dev Connection between nullifiers and profiles. Used to correctly unverify the past profile when re-verifying.
-    mapping(uint256 => address) internal nullifierHashes;
+    mapping(string => mapping(uint256 => address)) internal nullifierHashes;
 
     /// @param _worldId The WorldID instance that will verify the proofs
     /// @param _appId The World ID App ID (from Developer Portal)
@@ -44,11 +44,13 @@ contract WorldCoinVerification {
     }
 
     /// @notice Verify a farcaster user profile
+    /// @param appId farcaster application id
     /// @param profileAddress farcaster profile address to be verified
     /// @param root The root of the Merkle tree (returned by the JS SDK).
     /// @param nullifierHash The nullifier hash for this proof, preventing double signaling (returned by the JS widget).
     /// @param proof The zero-knowledge proof that demonstrates the claimer is registered with World ID (returned by the JS widget).
     function verify(
+        string calldata appId,
         address profileAddress,
         uint256 root,
         uint256 nullifierHash,
@@ -57,7 +59,7 @@ contract WorldCoinVerification {
         worldId.verifyProof(
             root,
             groupId,
-            abi.encodePacked(profileAddress).hashToField(),
+            abi.encodePacked(appId, profileAddress).hashToField(),
             nullifierHash,
             externalNullifierHash,
             proof
@@ -71,11 +73,11 @@ contract WorldCoinVerification {
         }*/
 
         require(
-            nullifierHashes[nullifierHash] == address(0),
+            nullifierHashes[appId][nullifierHash] == address(0),
             "WorldCoinVerification: World id user has already verified the farcaster");
 
-        isVerified[profileAddress] = true;
-        nullifierHashes[nullifierHash] = profileAddress;
+        isVerified[appId][profileAddress] = true;
+        nullifierHashes[appId][nullifierHash] = profileAddress;
 
-        emit ProfileVerified(profileAddress);
+        emit ProfileVerified(appId, profileAddress);
     }}
