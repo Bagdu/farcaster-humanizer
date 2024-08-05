@@ -9,6 +9,7 @@ import useVerifyProof from "../hooks/UseVerifyProof";
 export function Verify() {
   const [loading, setLoading] = useState(false);
   const [checkAddress, setCheckAddress] = useState("")
+  const [farcasterAppId, setFarcasterAppid] = useState("")
 
   const { address } = useAccount();
   const { verifyProof, checkVerifyProof } = useVerifyProof();
@@ -34,7 +35,7 @@ export function Verify() {
   const onSuccess = async (result: any) => {
     setLoading(true);
     try {
-      await verifyProof(result);
+      await verifyProof(result, farcasterAppId);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
@@ -49,20 +50,30 @@ export function Verify() {
 
   return (
     <>
+      <div>
+        <label> Farcaster AppId </label>
+        <input
+          style={styles.input}
+          value={farcasterAppId}
+          type="text"
+          onChange={e => setFarcasterAppid(e.target.value)}
+        />
+      </div>
+
       <IDKitWidget
         app_id={WORLDCOIN_APP_ID} // obtained from the Developer Portal
         action="verify-human" // this is your action name from the Developer Portal
-        signal={address}
+        signal={farcasterAppId + address}
         onSuccess={onSuccess} // callback when the modal is closed
         verification_level={VerificationLevel.Orb}// optional, defaults to ['orb']
       >
         {({ open }) => {
           return (
-              <Button
-                  onClick={open}
-              >
-                Verify with World ID
-              </Button>
+            <Button
+              onClick={open}
+            >
+              Verify with World ID
+            </Button>
           );
         }}
       </IDKitWidget>

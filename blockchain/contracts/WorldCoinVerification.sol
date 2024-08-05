@@ -5,7 +5,7 @@ import { IWorldIDGroups } from './interfaces/IWorldID.sol';
 pragma solidity 0.8.24;
 
 // Uncomment this line to use console.log
-// import "hardhat/console.sol";
+//import "hardhat/console.sol";
 
 contract WorldCoinVerification {
     using ByteHasher for bytes;
@@ -44,12 +44,14 @@ contract WorldCoinVerification {
     }
 
     /// @notice Verify a farcaster user profile
+    /// @param signal signal for the proof
     /// @param farcasterAppId farcaster application id
     /// @param profileAddress farcaster profile address to be verified
     /// @param root The root of the Merkle tree (returned by the JS SDK).
     /// @param nullifierHash The nullifier hash for this proof, preventing double signaling (returned by the JS widget).
     /// @param proof The zero-knowledge proof that demonstrates the claimer is registered with World ID (returned by the JS widget).
     function verify(
+        string calldata signal,
         string calldata farcasterAppId,
         address profileAddress,
         uint256 root,
@@ -59,7 +61,7 @@ contract WorldCoinVerification {
         worldId.verifyProof(
             root,
             groupId,
-            abi.encodePacked(farcasterAppId, profileAddress).hashToField(),
+            abi.encodePacked(signal).hashToField(),
             nullifierHash,
             externalNullifierHash,
             proof
