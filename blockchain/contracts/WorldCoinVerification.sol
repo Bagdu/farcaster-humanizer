@@ -12,7 +12,7 @@ contract WorldCoinVerification {
 
     /// @notice Emitted when a profile is verified
     /// @param profileAddress The ID of the profile getting verified
-    event ProfileVerified(string indexed appId, address indexed profileAddress);
+    event ProfileVerified(string indexed farcasterAppId, address indexed profileAddress);
 
     /// @notice Emitted when a profileAddress is unverified
     /// @param profileAddress The ID of the profile no longer verified
@@ -44,13 +44,13 @@ contract WorldCoinVerification {
     }
 
     /// @notice Verify a farcaster user profile
-    /// @param appId farcaster application id
+    /// @param farcasterAppId farcaster application id
     /// @param profileAddress farcaster profile address to be verified
     /// @param root The root of the Merkle tree (returned by the JS SDK).
     /// @param nullifierHash The nullifier hash for this proof, preventing double signaling (returned by the JS widget).
     /// @param proof The zero-knowledge proof that demonstrates the claimer is registered with World ID (returned by the JS widget).
     function verify(
-        string calldata appId,
+        string calldata farcasterAppId,
         address profileAddress,
         uint256 root,
         uint256 nullifierHash,
@@ -59,7 +59,7 @@ contract WorldCoinVerification {
         worldId.verifyProof(
             root,
             groupId,
-            abi.encodePacked(appId, profileAddress).hashToField(),
+            abi.encodePacked(farcasterAppId, profileAddress).hashToField(),
             nullifierHash,
             externalNullifierHash,
             proof
@@ -73,11 +73,11 @@ contract WorldCoinVerification {
         }*/
 
         require(
-            nullifierHashes[appId][nullifierHash] == address(0),
+            nullifierHashes[farcasterAppId][nullifierHash] == address(0),
             "WorldCoinVerification: World id user has already verified the farcaster");
 
-        isVerified[appId][profileAddress] = true;
-        nullifierHashes[appId][nullifierHash] = profileAddress;
+        isVerified[farcasterAppId][profileAddress] = true;
+        nullifierHashes[farcasterAppId][nullifierHash] = profileAddress;
 
-        emit ProfileVerified(appId, profileAddress);
+        emit ProfileVerified(farcasterAppId, profileAddress);
     }}
