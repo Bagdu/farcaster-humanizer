@@ -9,6 +9,7 @@ import useVerifyProof from "../hooks/UseVerifyProof";
 export function Verify() {
   const [loading, setLoading] = useState(false);
   const [checkAddress, setCheckAddress] = useState("")
+  const [appId, setAppId] = useState("")
   const [farcasterAppId, setFarcasterAppid] = useState("")
 
   const { address } = useAccount();
@@ -16,7 +17,7 @@ export function Verify() {
 
   const checkVerification = async () => {
     try {
-      const result = await checkVerifyProof(checkAddress);
+      const result = await checkVerifyProof(appId, checkAddress);
       if (result) {
         alert(`Your address ${address} has been verified`)
       } else{
@@ -85,19 +86,29 @@ export function Verify() {
       </Modal>
 
       <div>
-        <input
-          style={styles.input}
-          value={checkAddress}
-          type="text"
-          onChange={e => setCheckAddress(e.target.value)}
-        />
-        <Button
-          onClick={checkVerification}
-        >
-          Check Address
-        </Button>
+        <div>
+          App id
+          <input
+            style={styles.input}
+            value={appId}
+            type="text"
+            onChange={e => setAppId(e.target.value)}
+          />
 
+          Wallet Address
+          <input
+            style={styles.input}
+            value={checkAddress}
+            type="text"
+            onChange={e => setCheckAddress(e.target.value)}
+          />
+        </div>
       </div>
+      <Button
+        onClick={checkVerification}
+      >
+        Check Address
+      </Button>
     </>
   );
 }

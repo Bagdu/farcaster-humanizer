@@ -10,10 +10,6 @@ export function useVerifyProof() {
 
     const signal = farcasterAppId + address
     const args = [signal, farcasterAppId, address, result.merkle_root, result.nullifier_hash, unpackedProof];
-    console.log(args)
-    console.log(result)
-    console.log(unpackedProof)
-    console.log(farcasterAppId + address)
 
     const config = await prepareWriteContract({
       address: addresses.verify,
@@ -26,13 +22,13 @@ export function useVerifyProof() {
     await waitForTransaction({ hash });
   };
 
-  const checkVerifyProof = async (address: string) => {
+  const checkVerifyProof = async (appId: string, address: string) => {
 
     return await readContract({
       address: addresses.verify,
       abi: abis.verify,
       functionName: 'isVerified',
-      args: [address]
+      args: [appId, address]
     });
   };
 
