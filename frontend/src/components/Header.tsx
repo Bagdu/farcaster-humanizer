@@ -1,4 +1,4 @@
-import { Container, Image, Nav, Navbar } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function Header() {
