@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { VerificationLevel, IDKitWidget } from '@worldcoin/idkit';
+import { VerificationLevel, IDKitWidget, solidityEncode } from '@worldcoin/idkit';
 import { WORLDCOIN_APP_ID } from '../settings';
 import { useAccount } from 'wagmi';
 import Button from "react-bootstrap/Button";
@@ -64,7 +64,9 @@ export function Verify() {
       <IDKitWidget
         app_id={WORLDCOIN_APP_ID} // obtained from the Developer Portal
         action="verify-human" // this is your action name from the Developer Portal
-        signal={farcasterAppId + address}
+        signal={
+          solidityEncode(["string", "address"], [farcasterAppId, address])
+        }
         onSuccess={onSuccess} // callback when the modal is closed
         verification_level={VerificationLevel.Orb}// optional, defaults to ['orb']
       >

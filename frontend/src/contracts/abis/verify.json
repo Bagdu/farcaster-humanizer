@@ -80,11 +80,6 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "signal",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
         "name": "farcasterAppId",
         "type": "string"
       },

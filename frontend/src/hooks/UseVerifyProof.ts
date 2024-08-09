@@ -8,8 +8,7 @@ export function useVerifyProof() {
   const verifyProof = async (result: any, farcasterAppId: string) => {
     const [unpackedProof] = decodeAbiParameters([{ type: 'uint256[8]' }], result.proof);
 
-    const signal = farcasterAppId + address
-    const args = [signal, farcasterAppId, address, result.merkle_root, result.nullifier_hash, unpackedProof];
+    const args = [farcasterAppId, address, result.merkle_root, result.nullifier_hash, unpackedProof];
 
     const config = await prepareWriteContract({
       address: addresses.verify,
