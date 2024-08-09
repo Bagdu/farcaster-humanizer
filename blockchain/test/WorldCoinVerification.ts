@@ -37,20 +37,37 @@ describe("WorldCoinVerification", function () {
   describe("Verification", function (){
     it("Should verify correctly", async function () {
         const {owner, worldIdMock, worldVerifier} = await loadFixture(deployFixture)
-        await worldVerifier.verify(
+      await worldVerifier.verify(
+            "test_app_1",
             owner.address,
             123,
             23232,
             [1, 2, 3, 4, 5 , 6, 7 ,8]
         )
 
-        expect(await worldVerifier.isVerified(owner))
+        expect(await worldVerifier.isVerified("test_app_1", owner))
             .to.be.equal(true)
+
+        expect(await worldVerifier.isVerified("test_app_2", owner))
+            .to.be.equal(false)
+
+        await worldVerifier.verify(
+            "test_app_2",
+            owner.address,
+            123,
+            23232,
+            [1, 2, 3, 4, 5 , 6, 7 ,8]
+        )
+
+        expect(await worldVerifier.isVerified("test_app_2", owner))
+          .to.be.equal(true)
+
     });
 
     it("Should rever while verifying twice", async function () {
         const {owner, worldIdMock, worldVerifier} = await loadFixture(deployFixture)
         await worldVerifier.verify(
+            "test_app_1",
             owner.address,
             123,
             23232,
@@ -59,6 +76,7 @@ describe("WorldCoinVerification", function () {
 
 
         await expect(worldVerifier.verify(
+          "test_app_1",
             owner.address,
             123,
             23232,

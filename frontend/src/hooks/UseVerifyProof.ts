@@ -5,12 +5,10 @@ import {useAccount} from "wagmi";
 
 export function useVerifyProof() {
   const {address} = useAccount();
-  const verifyProof = async (result: any) => {
-    const signal = address;
+  const verifyProof = async (result: any, farcasterAppId: string) => {
     const [unpackedProof] = decodeAbiParameters([{ type: 'uint256[8]' }], result.proof);
 
-    const args = [signal, result.merkle_root, result.nullifier_hash, unpackedProof];
-
+    const args = [farcasterAppId, address, result.merkle_root, result.nullifier_hash, unpackedProof];
 
     const config = await prepareWriteContract({
       address: addresses.verify,
@@ -23,13 +21,13 @@ export function useVerifyProof() {
     await waitForTransaction({ hash });
   };
 
-  const checkVerifyProof = async (address: string) => {
+  const checkVerifyProof = async (appId: string, address: string) => {
 
     return await readContract({
       address: addresses.verify,
       abi: abis.verify,
       functionName: 'isVerified',
-      args: [address]
+      args: [appId, address]
     });
   };
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { VerificationLevel, IDKitWidget } from '@worldcoin/idkit';
+import { VerificationLevel, IDKitWidget, solidityEncode } from '@worldcoin/idkit';
 import { WORLDCOIN_APP_ID } from '../settings';
 import { useAccount } from 'wagmi';
 import Button from "react-bootstrap/Button";
@@ -9,13 +9,15 @@ import useVerifyProof from "../hooks/UseVerifyProof";
 export function Verify() {
   const [loading, setLoading] = useState(false);
   const [checkAddress, setCheckAddress] = useState("")
+  const [appId, setAppId] = useState("")
+  const [farcasterAppId, setFarcasterAppid] = useState("")
 
   const { address } = useAccount();
   const { verifyProof, checkVerifyProof } = useVerifyProof();
 
   const checkVerification = async () => {
     try {
-      const result = await checkVerifyProof(checkAddress);
+      const result = await checkVerifyProof(appId, checkAddress);
       if (result) {
         alert(`Your address ${address} has been verified`)
       } else{
@@ -34,7 +36,7 @@ export function Verify() {
   const onSuccess = async (result: any) => {
     setLoading(true);
     try {
-      await verifyProof(result);
+      await verifyProof(result, farcasterAppId);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
@@ -49,20 +51,32 @@ export function Verify() {
 
   return (
     <>
+      <div>
+        <label> Farcaster AppId </label>
+        <input
+          style={styles.input}
+          value={farcasterAppId}
+          type="text"
+          onChange={e => setFarcasterAppid(e.target.value)}
+        />
+      </div>
+
       <IDKitWidget
         app_id={WORLDCOIN_APP_ID} // obtained from the Developer Portal
         action="verify-human" // this is your action name from the Developer Portal
-        signal={address}
+        signal={
+          solidityEncode(["string", "address"], [farcasterAppId, address])
+        }
         onSuccess={onSuccess} // callback when the modal is closed
         verification_level={VerificationLevel.Orb}// optional, defaults to ['orb']
       >
         {({ open }) => {
           return (
-              <Button
-                  onClick={open}
-              >
-                Verify with World ID
-              </Button>
+            <Button
+              onClick={open}
+            >
+              Verify with World ID
+            </Button>
           );
         }}
       </IDKitWidget>
@@ -74,19 +88,29 @@ export function Verify() {
       </Modal>
 
       <div>
-        <input
-          style={styles.input}
-          value={checkAddress}
-          type="text"
-          onChange={e => setCheckAddress(e.target.value)}
-        />
-        <Button
-          onClick={checkVerification}
-        >
-          Check Address
-        </Button>
+        <div>
+          App id
+          <input
+            style={styles.input}
+            value={appId}
+            type="text"
+            onChange={e => setAppId(e.target.value)}
+          />
 
+          Wallet Address
+          <input
+            style={styles.input}
+            value={checkAddress}
+            type="text"
+            onChange={e => setCheckAddress(e.target.value)}
+          />
+        </div>
       </div>
+      <Button
+        onClick={checkVerification}
+      >
+        Check Address
+      </Button>
     </>
   );
 }
