@@ -17,15 +17,15 @@ export function Verify() {
     try {
       const result = await checkVerifyProof(fid);
       if (result) {
-        alert(`Your address ${address} has been verified`)
+        alert(`Your Fid ${fid} has been verified`)
       } else{
-        alert(`Your address ${address} has not been verified`)
+        alert(`Your Fid ${fid} has not been verified`)
       }
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
         if (e.message.includes('Error: InvalidNullifier()')) {
-          alert('You have already voted for this candidate');
+          alert('You Have Already Verified on this fid');
         } else alert(e.message);
       } else alert(e);
     }
@@ -39,7 +39,7 @@ export function Verify() {
       console.error(e);
       if (e instanceof Error) {
         if (e.message.includes('Error: InvalidNullifier()')) {
-          alert('You have already voted for this candidate');
+          alert('You Have Already Verified on this fid');
         } else alert(e.message);
       } else alert(e);
     } finally {
