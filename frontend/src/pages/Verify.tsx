@@ -8,16 +8,14 @@ import useVerifyProof from "../hooks/UseVerifyProof";
 
 export function Verify() {
   const [loading, setLoading] = useState(false);
-  const [checkAddress, setCheckAddress] = useState("")
-  const [appId, setAppId] = useState("")
-  const [farcasterAppId, setFarcasterAppid] = useState("")
+  const [fid, setFid] = useState("")
 
   const { address } = useAccount();
   const { verifyProof, checkVerifyProof } = useVerifyProof();
 
   const checkVerification = async () => {
     try {
-      const result = await checkVerifyProof(appId, checkAddress);
+      const result = await checkVerifyProof(fid);
       if (result) {
         alert(`Your address ${address} has been verified`)
       } else{
@@ -36,7 +34,7 @@ export function Verify() {
   const onSuccess = async (result: any) => {
     setLoading(true);
     try {
-      await verifyProof(result, farcasterAppId);
+      await verifyProof(result, fid);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
@@ -52,12 +50,12 @@ export function Verify() {
   return (
     <>
       <div>
-        <label> Farcaster AppId </label>
+        <label> fid </label>
         <input
           style={styles.input}
-          value={farcasterAppId}
+          value={fid}
           type="text"
-          onChange={e => setFarcasterAppid(e.target.value)}
+          onChange={e => setFid(e.target.value)}
         />
       </div>
 
@@ -65,7 +63,7 @@ export function Verify() {
         app_id={WORLDCOIN_APP_ID} // obtained from the Developer Portal
         action="verify-human" // this is your action name from the Developer Portal
         signal={
-          solidityEncode(["string", "address"], [farcasterAppId, address])
+          solidityEncode(["uint256"], [fid])
         }
         onSuccess={onSuccess} // callback when the modal is closed
         verification_level={VerificationLevel.Orb}// optional, defaults to ['orb']
@@ -88,29 +86,12 @@ export function Verify() {
       </Modal>
 
       <div>
-        <div>
-          App id
-          <input
-            style={styles.input}
-            value={appId}
-            type="text"
-            onChange={e => setAppId(e.target.value)}
-          />
-
-          Wallet Address
-          <input
-            style={styles.input}
-            value={checkAddress}
-            type="text"
-            onChange={e => setCheckAddress(e.target.value)}
-          />
-        </div>
+        <Button
+          onClick={checkVerification}
+        >
+          Check Address
+        </Button>
       </div>
-      <Button
-        onClick={checkVerification}
-      >
-        Check Address
-      </Button>
     </>
   );
 }

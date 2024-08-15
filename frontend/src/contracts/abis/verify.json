@@ -38,15 +38,9 @@
     "inputs": [
       {
         "indexed": true,
-        "internalType": "string",
-        "name": "farcasterAppId",
-        "type": "string"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "profileAddress",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "fid",
+        "type": "uint256"
       }
     ],
     "name": "ProfileVerified",
@@ -55,14 +49,9 @@
   {
     "inputs": [
       {
-        "internalType": "string",
+        "internalType": "uint256",
         "name": "",
-        "type": "string"
-      },
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
+        "type": "uint256"
       }
     ],
     "name": "isVerified",
@@ -79,14 +68,9 @@
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "farcasterAppId",
-        "type": "string"
-      },
-      {
-        "internalType": "address",
-        "name": "profileAddress",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "fid",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",
