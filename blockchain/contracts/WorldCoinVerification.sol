@@ -1,7 +1,7 @@
 import { ByteHasher } from './libs/ByteHasher.sol';
 import { IWorldIDGroups } from './interfaces/IWorldID.sol';
 
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.24;
 
 // Uncomment this line to use console.log
@@ -11,8 +11,8 @@ contract WorldCoinVerification {
     using ByteHasher for bytes;
 
     /// @notice Emitted when a profile is verified
-    /// @param profileAddress The ID of the profile getting verified
-    event ProfileVerified(string indexed farcasterAppId, address indexed profileAddress);
+    /// @param fid The ID of the profile getting verified
+    event ProfileVerified(uint256 indexed fid);
 
     /// @notice Emitted when a profileAddress is unverified
     /// @param profileAddress The ID of the profile no longer verified
@@ -28,10 +28,10 @@ contract WorldCoinVerification {
     uint256 internal immutable externalNullifierHash;
 
     /// @notice Whether a profile address is verified
-    mapping(string => mapping(address => bool)) public isVerified;
+    mapping(uint256 => bool) public isVerified;
 
     /// @dev Connection between nullifiers and profiles. Used to correctly unverify the past profile when re-verifying.
-    mapping(string => mapping(uint256 => address)) internal nullifierHashes;
+    mapping(uint256 => uint256) internal nullifierHashes;
 
     /// @param _worldId The WorldID instance that will verify the proofs
     /// @param _appId The World ID App ID (from Developer Portal)
@@ -44,14 +44,12 @@ contract WorldCoinVerification {
     }
 
     /// @notice Verify a farcaster user profile
-    /// @param farcasterAppId farcaster application id
-    /// @param profileAddress farcaster profile address to be verified
+    /// @param fid farcaster user id
     /// @param root The root of the Merkle tree (returned by the JS SDK).
     /// @param nullifierHash The nullifier hash for this proof, preventing double signaling (returned by the JS widget).
     /// @param proof The zero-knowledge proof that demonstrates the claimer is registered with World ID (returned by the JS widget).
     function verify(
-        string calldata farcasterAppId,
-        address profileAddress,
+        uint256 fid,
         uint256 root,
         uint256 nullifierHash,
         uint256[8] calldata proof
@@ -59,7 +57,7 @@ contract WorldCoinVerification {
         worldId.verifyProof(
             root,
             groupId,
-            abi.encodePacked(farcasterAppId, profileAddress).hashToField(),
+            abi.encodePacked(fid).hashToField(),
             nullifierHash,
             externalNullifierHash,
             proof
@@ -73,11 +71,11 @@ contract WorldCoinVerification {
         }*/
 
         require(
-            nullifierHashes[farcasterAppId][nullifierHash] == address(0),
+            nullifierHashes[nullifierHash] == 0,
             "WorldCoinVerification: World id user has already verified the farcaster");
 
-        isVerified[farcasterAppId][profileAddress] = true;
-        nullifierHashes[farcasterAppId][nullifierHash] = profileAddress;
+        isVerified[fid] = true;
+        nullifierHashes[nullifierHash] = fid;
 
-        emit ProfileVerified(farcasterAppId, profileAddress);
+        emit ProfileVerified(fid);
     }}
