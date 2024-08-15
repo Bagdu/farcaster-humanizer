@@ -85,7 +85,7 @@ export function Verify() {
         </Modal.Body>
       </Modal>
 
-      <div>
+      <div style={{marginTop: 12}}>
         <Button
           onClick={checkVerification}
         >
