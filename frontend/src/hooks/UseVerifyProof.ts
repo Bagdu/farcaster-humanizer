@@ -4,7 +4,6 @@ import {decodeAbiParameters} from 'viem';
 import {useAccount} from "wagmi";
 
 export function useVerifyProof() {
-  const {address} = useAccount();
   const verifyProof = async (result: any, fid: string) => {
     const [unpackedProof] = decodeAbiParameters([{ type: 'uint256[8]' }], result.proof);
 
