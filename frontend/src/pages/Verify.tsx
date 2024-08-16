@@ -48,7 +48,7 @@ export function Verify() {
   return (
     <>
       <div>
-        <label> fid </label>
+        <label> Farcaster id (FID) </label>
         <input
           style={styles.input}
           value={fid}
