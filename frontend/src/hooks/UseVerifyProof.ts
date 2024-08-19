@@ -4,7 +4,7 @@ import {decodeAbiParameters} from 'viem';
 import {useAccount} from "wagmi";
 
 export function useVerifyProof() {
-  const verifyProof = async (result: any, fid: string) => {
+  const verifyProof = async (result: any, fid: number) => {
     const [unpackedProof] = decodeAbiParameters([{ type: 'uint256[8]' }], result.proof);
 
     const args = [fid, result.merkle_root, result.nullifier_hash, unpackedProof];
@@ -20,7 +20,7 @@ export function useVerifyProof() {
     await waitForTransaction({ hash });
   };
 
-  const checkVerifyProof = async (fid: string) => {
+  const checkVerifyProof = async (fid: number) => {
 
     return await readContract({
       address: addresses.verify,

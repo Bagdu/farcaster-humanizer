@@ -4,12 +4,14 @@ import { VerificationLevel, IDKitWidget, solidityEncode } from '@worldcoin/idkit
 import { WORLDCOIN_APP_ID } from '../settings';
 import Button from "react-bootstrap/Button";
 import useVerifyProof from "../hooks/UseVerifyProof";
+import { SignInButton } from '@farcaster/auth-kit';
 
 export function Verify() {
   const [loading, setLoading] = useState(false);
-  const [fid, setFid] = useState("")
+  const [fid, setFid] = useState(123)
 
   const { verifyProof, checkVerifyProof } = useVerifyProof();
+
 
   const checkVerification = async () => {
     try {
@@ -47,13 +49,18 @@ export function Verify() {
 
   return (
     <>
+      <SignInButton
+        onSuccess={({ fid, username }) =>
+          setFid(Number(fid))
+        }
+      />
       <div>
         <label> Farcaster id (FID) </label>
         <input
           style={styles.input}
           value={fid}
-          type="text"
-          onChange={e => setFid(e.target.value)}
+          type="number"
+          onChange={e => setFid(Number(e.target.value))}
         />
         <IDKitWidget
           app_id={WORLDCOIN_APP_ID} // obtained from the Developer Portal
