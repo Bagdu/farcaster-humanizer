@@ -80,5 +80,25 @@ describe("WorldCoinVerification", function () {
         )).to.be
             .revertedWith("WorldCoinVerification: World id user has already verified the farcaster")
     });
+
+    it("It should return the error if someone tries to verify the verified fid", async function () {
+    const {owner, worldIdMock, worldVerifier} = await loadFixture(deployFixture)
+    await worldVerifier.verify(
+        1234,
+        123,
+        23232,
+        [1, 2, 3, 4, 5 , 6, 7 ,8]
+    )
+
+
+    await expect(worldVerifier.verify(
+        1234,
+        123,
+        1123,
+        [1, 2, 3, 4, 5 , 6, 7 ,8]
+    )).to.be
+        .revertedWith("WorldCoinVerification: Provided FID was already verified")
+});
+
   });
 });

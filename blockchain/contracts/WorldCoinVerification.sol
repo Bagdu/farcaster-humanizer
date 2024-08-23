@@ -11,10 +11,6 @@ contract WorldCoinVerification {
     /// @param fid The ID of the profile getting verified
     event ProfileVerified(uint256 indexed fid);
 
-    /// @notice Emitted when a profileAddress is unverified
-    /// @param profileAddress The ID of the profile no longer verified
-    event ProfileUnverified(address indexed profileAddress);
-
     /// @dev The World ID instance that will be used for verifying proofs
     IWorldIDGroups public immutable worldId;
 
@@ -60,16 +56,13 @@ contract WorldCoinVerification {
             proof
         );
 
-        /**
-        if (nullifierHashes[nullifierHash] != 0) {
-            uint256 prevProfileAddress = nullifierHashes[nullifierHash];
-            isVerified[prevProfileAddress] = false;
-            emit ProfileUnverified(prevProfileAddress);
-        }*/
-
         require(
             nullifierHashes[nullifierHash] == 0,
             "WorldCoinVerification: World id user has already verified the farcaster");
+
+        require(
+            !isVerified[fid],
+            "WorldCoinVerification: Provided FID was already verified");
 
         isVerified[fid] = true;
         nullifierHashes[nullifierHash] = fid;
