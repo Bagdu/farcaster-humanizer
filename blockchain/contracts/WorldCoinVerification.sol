@@ -24,7 +24,7 @@ contract WorldCoinVerification {
     mapping(uint256 => bool) public isVerified;
 
     /// @dev Connection between nullifiers and profiles. Used to correctly unverify the past profile when re-verifying.
-    mapping(uint256 => uint256) internal nullifierHashes;
+    mapping(uint256 => bool) internal nullifierHashes;
 
     /// @param _worldId The WorldID instance that will verify the proofs
     /// @param _appId The World ID App ID (from Developer Portal)
@@ -57,7 +57,7 @@ contract WorldCoinVerification {
         );
 
         require(
-            nullifierHashes[nullifierHash] == 0,
+            !nullifierHashes[nullifierHash],
             "WorldCoinVerification: World id user has already verified the farcaster");
 
         require(
@@ -65,7 +65,7 @@ contract WorldCoinVerification {
             "WorldCoinVerification: Provided FID was already verified");
 
         isVerified[fid] = true;
-        nullifierHashes[nullifierHash] = fid;
+        nullifierHashes[nullifierHash] = true;
 
         emit ProfileVerified(fid);
     }}
