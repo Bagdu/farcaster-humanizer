@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import { Route, Routes } from 'react-router-dom';
 import Verify from './pages/Verify';
+import VerifyFid  from './pages/VerifyFid';
 import { useAccount, useNetwork } from 'wagmi';
 import { DEFAULT_CHAIN } from './settings';
 import { AuthKitProvider } from '@farcaster/auth-kit';
@@ -34,6 +35,7 @@ function App() {
                 ) : (
                   <Routes>
                     <Route path="*" element={<Verify />} />
+                    <Route path="farcaster/:fid" Component={VerifyFid}/>
                   </Routes>
                 )
               ) : (
