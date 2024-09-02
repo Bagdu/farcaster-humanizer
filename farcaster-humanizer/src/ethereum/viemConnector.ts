@@ -1,5 +1,5 @@
 import { createPublicClient, http } from "viem";
-import { optimism } from "viem/chains";
+import { optimismSepolia } from "viem/chains";
 import {abis, addresses} from '../contracts';
 
 export interface ViemConfigArgs {
@@ -8,7 +8,7 @@ export interface ViemConfigArgs {
 
 export const viemConnector = (args?: ViemConfigArgs) => {
   const publicClient = createPublicClient({
-    chain: optimism,
+    chain: optimismSepolia,
     transport: http(args?.rpcUrl),
   });
 
