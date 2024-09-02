@@ -5,16 +5,10 @@ import { WORLDCOIN_APP_ID } from '../settings';
 import Button from "react-bootstrap/Button";
 import useVerifyProof from "../hooks/UseVerifyProof";
 import { SignInButton } from '@farcaster/auth-kit';
-import { useVerified } from "farcaster-humanizer"
 
 export function Verify() {
   const [loading, setLoading] = useState(false);
   const [fid, setFid] = useState(123)
-
-
-  const { isVerified } = useVerified({})
-
-  console.log(isVerified(123))
 
   const { verifyProof, checkVerifyProof } = useVerifyProof();
 
