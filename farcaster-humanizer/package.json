@@ -1,17 +1,29 @@
 {
   "name": "farcaster-humanizer",
   "version": "1.0.0",
-  "description": "Farcaster humanizer package",
-  "main": "src/index.ts",
+  "description": "",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "react-scripts start",
-    "build": "tsup --config tsup.config.ts"
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
   "dependencies": {
-    "tsup": "^8.2.4",
     "viem": "^2.21.1"
   }
 }
