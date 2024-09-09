@@ -55,7 +55,7 @@ export function Verify() {
         </h3>
 
         <label style={{ color: '#000000', paddingTop: 20 }}>
-          Type in your FID manually or scan the QR code
+          Scan QR code
         </label>
 
       </div>
@@ -66,15 +66,6 @@ export function Verify() {
             onSuccess={({ fid, username }) =>
               setFid(Number(fid))
             }
-          />
-        </div>
-        <div>
-          <input
-            style={styles.input}
-            value={fid === 0 ? '' : fid}
-            type="number"
-            placeholder="type your fid here"
-            onChange={e => setFid(Number(e.target.value))}
           />
         </div>
       </div>
@@ -129,7 +120,7 @@ export function Verify() {
             style={{backgroundColor: "#7c65c1"}}
             onClick={checkVerification}
           >
-            Check Address
+            Check FID status
           </Button>
         </div>
       </div>
@@ -138,12 +129,3 @@ export function Verify() {
 }
 
 export default Verify;
-
-const styles = ({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
