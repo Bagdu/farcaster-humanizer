@@ -27,12 +27,11 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="ms-2" />
         </Container>
       </Navbar>
+
       <hr style={{
-        border: 0,
-        display: "block",
-        width: "96%",
-        backgroundColor: "#FFFF00",
-        height: 1
+        borderBottom: "1px",
+        backgroundColor: "red",
+        color: "#000000",
       }} />
     </>
   );
