@@ -49,7 +49,7 @@ export function Verify() {
 
   return (
     <>
-      <div>
+      <div className="text-center">
         <h3 style={{ color: '#000000' }}>
           How to use Farcaster Humanizer
         </h3>
@@ -79,7 +79,7 @@ export function Verify() {
         </div>
       </div>
 
-      <div>
+      <div className="text-center">
         <div>
           <label style={{ color: '#000000', paddingTop: 20 }}>
             Verify FID with WorldId
