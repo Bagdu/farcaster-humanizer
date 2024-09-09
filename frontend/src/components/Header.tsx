@@ -17,7 +17,7 @@ function Header() {
         </div>
         <Navbar.Brand as={Link} to="/">
           <Image src="/images/farcaster-logo.jpg" height={28} className="me-lg-5" />
-          Farcaster humanizer
+          Farcaster Humanizer
         </Navbar.Brand>
         <div className="ms-auto">
           <w3m-button />
