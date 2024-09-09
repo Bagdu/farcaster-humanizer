@@ -8,6 +8,9 @@ import { useAccount, useNetwork } from 'wagmi';
 import { DEFAULT_CHAIN } from './settings';
 import { AuthKitProvider } from '@farcaster/auth-kit';
 import '@farcaster/auth-kit/styles.css';
+import "@fontsource/ibm-plex-mono";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/400-italic.css";
 
 const config = {
   rpcUrl: 'https://mainnet.optimism.io',
