@@ -1,7 +1,6 @@
 import {prepareWriteContract, readContract, waitForTransaction, writeContract} from '@wagmi/core';
 import {abis, addresses} from '../contracts';
 import {decodeAbiParameters} from 'viem';
-import {useAccount} from "wagmi";
 
 export function useVerifyProof() {
   const verifyProof = async (result: any, fid: number) => {

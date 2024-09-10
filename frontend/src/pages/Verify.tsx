@@ -50,17 +50,17 @@ export function Verify() {
   return (
     <>
       <div className="text-center">
-        <h3 style={{ color: '#000000' }}>
+        <h3 style={styles.headline}>
           How to use Farcaster Humanizer
         </h3>
 
-        <label style={{ color: '#000000', paddingTop: 20 }}>
+        <label style={styles.label}>
           Scan QR code
         </label>
 
       </div>
 
-      <div style={{ paddingTop: 20, display: "flex" }}>
+      <div style={styles.signInButton}>
         <div className="centered">
           <SignInButton
             onSuccess={({ fid, username }) =>
@@ -72,12 +72,12 @@ export function Verify() {
 
       <div className="text-center">
         <div>
-          <label style={{ color: '#000000', paddingTop: 20 }}>
+          <label style={styles.label}>
             Verify FID with WorldId
           </label>
         </div>
 
-        <div style={{marginTop: 20}}>
+        <div style={styles.worldIdVerificationDiv}>
           <IDKitWidget
             app_id={WORLDCOIN_APP_ID} // obtained from the Developer Portal
             action="verify-human" // this is your action name from the Developer Portal
@@ -87,16 +87,15 @@ export function Verify() {
             onSuccess={onSuccess} // callback when the modal is closed
             verification_level={VerificationLevel.Orb}// optional, defaults to ['orb']
           >
-            {({ open }) => {
-              return (
+            {({ open }) => (
                 <Button
-                  style={{backgroundColor: "#7c65c1"}}
+                  style={styles.worldIdButton}
                   onClick={open}
                 >
                   Verify with World ID
                 </Button>
-              );
-            }}
+              )
+            }
           </IDKitWidget>
           <Modal show={loading} centered>
             <Modal.Body className="text-center">
@@ -110,14 +109,14 @@ export function Verify() {
 
       <div>
         <div>
-          <label style={{ color: '#000000', paddingTop: 20 }}>
+          <label style={styles.label}>
             Check verification status for your FID
           </label>
         </div>
 
-        <div style={{marginTop: 20}} className="text-center">
+        <div style={styles.checkFidDiv} className="text-center">
           <Button
-            style={{backgroundColor: "#7c65c1"}}
+            style={styles.checkFidButton}
             onClick={checkVerification}
           >
             Check FID status
@@ -125,14 +124,14 @@ export function Verify() {
         </div>
       </div>
 
-      <div style={{ paddingTop: 60, display: "grid" }}>
+      <div style={styles.linkDiv}>
         <div className="text-center">
-          <a href="https://www.npmjs.com/package/farcaster-humanizer" style={{color: "#000000"}}>
+          <a href="https://www.npmjs.com/package/farcaster-humanizer" style={styles.link}>
             How Farcaster Humanizer works ?
           </a>
         </div>
-        <div style={{paddingTop: 10}} className="text-center">
-          <a href="https://www.npmjs.com/package/farcaster-humanizer" style={{color: "#000000"}}>
+        <div style={styles.secondLinkDiv} className="text-center">
+          <a href="https://www.npmjs.com/package/farcaster-humanizer" style={styles.link}>
             Add Farcaster Humanizer to your application
           </a>
         </div>
@@ -142,3 +141,17 @@ export function Verify() {
 }
 
 export default Verify;
+
+
+const styles = {
+  headline: { color: "#000000" },
+  label: { color: "#000000", marginTop: 20 },
+  signInButton: { marginTop: 20, display: "flex" },
+  worldIdVerificationDiv: {marginTop: 20},
+  worldIdButton: {backgroundColor: "#7c65c1"},
+  linkDiv: { marginTop: 60, display: "grid" },
+  link: { color: "#000000" },
+  secondLinkDiv: {marginTop: 10},
+  checkFidDiv: {marginTop: 20},
+  checkFidButton: {backgroundColor: "#7c65c1"}
+}
