@@ -4,8 +4,6 @@ import { useVerified } from 'farcaster-humanizer';
 import { Image } from 'react-bootstrap';
 
 export function Demo() {
-  const [loading, setLoading] = useState(false);
-  const [fid, setFid] = useState(0)
   const [showLabel, setShowLabel] = useState(false)
   const [verifiedHuman, setVerifiedHuman] = useState(false)
 
@@ -25,11 +23,11 @@ export function Demo() {
 
       </div>
 
-      <div className="signInButton">
+      <div>
         <div className="centered">
           <SignInButton
-            onSuccess={async ({ fid, username }) => {
-                setFid(Number(fid))
+            onSuccess={
+              async ({ fid, username }) => {
                 setShowLabel(true)
                 setVerifiedHuman(await isVerified(Number(fid)))
               }
