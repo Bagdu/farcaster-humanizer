@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { VerificationLevel, IDKitWidget, solidityEncode } from '@worldcoin/idkit';
-import { WORLDCOIN_APP_ID } from '../settings';
+import { WORLDCOIN_APP_ID } from '../../settings';
 import Button from "react-bootstrap/Button";
-import {verifyProof, checkVerifyProof} from "../ethereum/verify";
+import {verifyProof, checkVerifyProof} from "../../ethereum/verify";
 import { SignInButton} from "@farcaster/auth-kit";
 
 import "./verify.css"

@@ -2,10 +2,12 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import { Route, Routes } from 'react-router-dom';
-import Verify from './pages/Verify';
+import Verify from './pages/Verify/Verify';
+import Demo from "./pages/demo/Demo"
 import { useAccount, useNetwork } from 'wagmi';
 import { DEFAULT_CHAIN } from './settings';
 import { AuthKitProvider } from '@farcaster/auth-kit';
+
 import '@farcaster/auth-kit/styles.css';
 import "@fontsource/ibm-plex-mono";
 import "@fontsource/ibm-plex-mono/400.css";
@@ -37,6 +39,7 @@ function App() {
                 ) : (
                   <Routes>
                     <Route path="*" element={<Verify />} />
+                    <Route path="/demo" element={<Demo />} />
                   </Routes>
                 )
               ) : (
