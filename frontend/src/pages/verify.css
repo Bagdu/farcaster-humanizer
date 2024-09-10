@@ -1,0 +1,42 @@
+.headline {
+    color: #000000
+}
+
+.label {
+    color: #000000;
+    margin-top: 20px;
+}
+
+.signInButton {
+    margin-top: 20px;
+    display: flex;
+}
+
+.worldIdVerificationDiv {
+    margin-top: 20px;
+}
+
+.worldIdButton {
+    background-color: #7c65c1
+}
+
+.linkDiv { 
+    margin-top: 60px;
+    display: grid
+}
+
+.link {
+    color: #000000;
+}
+
+.secondLinkDiv {
+    margin-top: 10px;
+}
+
+.checkFidDiv {
+    margin-top: 20px;
+}
+
+.checkFidButton {
+    background-color: #7c65c1
+}

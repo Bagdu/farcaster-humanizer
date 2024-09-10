@@ -3,14 +3,15 @@ import { Modal } from 'react-bootstrap';
 import { VerificationLevel, IDKitWidget, solidityEncode } from '@worldcoin/idkit';
 import { WORLDCOIN_APP_ID } from '../settings';
 import Button from "react-bootstrap/Button";
-import useVerifyProof from "../hooks/UseVerifyProof";
+import {verifyProof, checkVerifyProof} from "../ethereum/verify";
 import { SignInButton} from "@farcaster/auth-kit";
+
+import "./verify.css"
 
 export function Verify() {
   const [loading, setLoading] = useState(false);
   const [fid, setFid] = useState(0)
 
-  const { verifyProof, checkVerifyProof } = useVerifyProof();
 
 
   const checkVerification = async () => {
@@ -50,17 +51,17 @@ export function Verify() {
   return (
     <>
       <div className="text-center">
-        <h3 style={{ color: '#000000' }}>
+        <h3 className="headline">
           How to use Farcaster Humanizer
         </h3>
 
-        <label style={{ color: '#000000', paddingTop: 20 }}>
+        <label className="label">
           Scan QR code
         </label>
 
       </div>
 
-      <div style={{ paddingTop: 20, display: "flex" }}>
+      <div className="signInButton">
         <div className="centered">
           <SignInButton
             onSuccess={({ fid, username }) =>
@@ -72,12 +73,12 @@ export function Verify() {
 
       <div className="text-center">
         <div>
-          <label style={{ color: '#000000', paddingTop: 20 }}>
+          <label className="label">
             Verify FID with WorldId
           </label>
         </div>
 
-        <div style={{marginTop: 20}}>
+        <div className="worldIdVerificationDiv">
           <IDKitWidget
             app_id={WORLDCOIN_APP_ID} // obtained from the Developer Portal
             action="verify-human" // this is your action name from the Developer Portal
@@ -87,16 +88,15 @@ export function Verify() {
             onSuccess={onSuccess} // callback when the modal is closed
             verification_level={VerificationLevel.Orb}// optional, defaults to ['orb']
           >
-            {({ open }) => {
-              return (
+            {({ open }) => (
                 <Button
-                  style={{backgroundColor: "#7c65c1"}}
+                  className="worldIdButton"
                   onClick={open}
                 >
                   Verify with World ID
                 </Button>
-              );
-            }}
+              )
+            }
           </IDKitWidget>
           <Modal show={loading} centered>
             <Modal.Body className="text-center">
@@ -110,14 +110,14 @@ export function Verify() {
 
       <div>
         <div>
-          <label style={{ color: '#000000', paddingTop: 20 }}>
+          <label className="label">
             Check verification status for your FID
           </label>
         </div>
 
-        <div style={{marginTop: 20}} className="text-center">
+        <div className="text-center checkFidDiv">
           <Button
-            style={{backgroundColor: "#7c65c1"}}
+            className="checkFidButton"
             onClick={checkVerification}
           >
             Check FID status
@@ -125,14 +125,14 @@ export function Verify() {
         </div>
       </div>
 
-      <div style={{ paddingTop: 60, display: "grid" }}>
+      <div className="linkDiv">
         <div className="text-center">
-          <a href="https://www.npmjs.com/package/farcaster-humanizer" style={{color: "#000000"}}>
+          <a href="https://www.npmjs.com/package/farcaster-humanizer" className="link">
             How Farcaster Humanizer works ?
           </a>
         </div>
-        <div style={{paddingTop: 10}} className="text-center">
-          <a href="https://www.npmjs.com/package/farcaster-humanizer" style={{color: "#000000"}}>
+        <div className="text-center secondLinkDiv">
+          <a href="https://www.npmjs.com/package/farcaster-humanizer" className="link">
             Add Farcaster Humanizer to your application
           </a>
         </div>

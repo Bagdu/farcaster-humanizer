@@ -45,6 +45,3 @@ root.render(
       </WagmiConfig>
     </React.StrictMode>,
 );
-
-export  { Verify } from './pages/Verify';
-export { useVerifyProof } from "./hooks/UseVerifyProof";
