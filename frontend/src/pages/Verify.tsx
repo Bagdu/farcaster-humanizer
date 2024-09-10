@@ -6,6 +6,8 @@ import Button from "react-bootstrap/Button";
 import useVerifyProof from "../hooks/UseVerifyProof";
 import { SignInButton} from "@farcaster/auth-kit";
 
+import "./verify.css"
+
 export function Verify() {
   const [loading, setLoading] = useState(false);
   const [fid, setFid] = useState(0)
@@ -50,17 +52,17 @@ export function Verify() {
   return (
     <>
       <div className="text-center">
-        <h3 style={styles.headline}>
+        <h3 className="headline">
           How to use Farcaster Humanizer
         </h3>
 
-        <label style={styles.label}>
+        <label className="label">
           Scan QR code
         </label>
 
       </div>
 
-      <div style={styles.signInButton}>
+      <div className="signInButton">
         <div className="centered">
           <SignInButton
             onSuccess={({ fid, username }) =>
@@ -72,12 +74,12 @@ export function Verify() {
 
       <div className="text-center">
         <div>
-          <label style={styles.label}>
+          <label className="label">
             Verify FID with WorldId
           </label>
         </div>
 
-        <div style={styles.worldIdVerificationDiv}>
+        <div className="worldIdVerificationDiv">
           <IDKitWidget
             app_id={WORLDCOIN_APP_ID} // obtained from the Developer Portal
             action="verify-human" // this is your action name from the Developer Portal
@@ -89,7 +91,7 @@ export function Verify() {
           >
             {({ open }) => (
                 <Button
-                  style={styles.worldIdButton}
+                  className="worldIdButton"
                   onClick={open}
                 >
                   Verify with World ID
@@ -109,14 +111,14 @@ export function Verify() {
 
       <div>
         <div>
-          <label style={styles.label}>
+          <label className="label">
             Check verification status for your FID
           </label>
         </div>
 
-        <div style={styles.checkFidDiv} className="text-center">
+        <div className="text-center checkFidDiv">
           <Button
-            style={styles.checkFidButton}
+            className="checkFidButton"
             onClick={checkVerification}
           >
             Check FID status
@@ -124,14 +126,14 @@ export function Verify() {
         </div>
       </div>
 
-      <div style={styles.linkDiv}>
+      <div className="linkDiv">
         <div className="text-center">
-          <a href="https://www.npmjs.com/package/farcaster-humanizer" style={styles.link}>
+          <a href="https://www.npmjs.com/package/farcaster-humanizer" className="link">
             How Farcaster Humanizer works ?
           </a>
         </div>
-        <div style={styles.secondLinkDiv} className="text-center">
-          <a href="https://www.npmjs.com/package/farcaster-humanizer" style={styles.link}>
+        <div className="text-center secondLinkDiv">
+          <a href="https://www.npmjs.com/package/farcaster-humanizer" className="link">
             Add Farcaster Humanizer to your application
           </a>
         </div>
@@ -141,17 +143,3 @@ export function Verify() {
 }
 
 export default Verify;
-
-
-const styles = {
-  headline: { color: "#000000" },
-  label: { color: "#000000", marginTop: 20 },
-  signInButton: { marginTop: 20, display: "flex" },
-  worldIdVerificationDiv: {marginTop: 20},
-  worldIdButton: {backgroundColor: "#7c65c1"},
-  linkDiv: { marginTop: 60, display: "grid" },
-  link: { color: "#000000" },
-  secondLinkDiv: {marginTop: 10},
-  checkFidDiv: {marginTop: 20},
-  checkFidButton: {backgroundColor: "#7c65c1"}
-}
