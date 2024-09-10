@@ -4,7 +4,7 @@ import { VerificationLevel, IDKitWidget, solidityEncode } from '@worldcoin/idkit
 import { WORLDCOIN_APP_ID } from '../settings';
 import Button from "react-bootstrap/Button";
 import useVerifyProof from "../hooks/UseVerifyProof";
-import { SignInButton} from '@farcaster/auth-kit';
+import { SignInButton} from "@farcaster/auth-kit";
 
 export function Verify() {
   const [loading, setLoading] = useState(false);
@@ -122,6 +122,19 @@ export function Verify() {
           >
             Check FID status
           </Button>
+        </div>
+      </div>
+
+      <div style={{ paddingTop: 60, display: "grid" }}>
+        <div className="text-center">
+          <a href="https://www.npmjs.com/package/farcaster-humanizer" style={{color: "#000000"}}>
+            How Farcaster Humanizer works ?
+          </a>
+        </div>
+        <div style={{paddingTop: 10}} className="text-center">
+          <a href="https://www.npmjs.com/package/farcaster-humanizer" style={{color: "#000000"}}>
+            Add Farcaster Humanizer to your application
+          </a>
         </div>
       </div>
     </>
