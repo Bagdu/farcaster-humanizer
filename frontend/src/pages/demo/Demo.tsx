@@ -32,6 +32,11 @@ export function Demo() {
                 setVerifiedHuman(await isVerified(Number(fid)))
               }
             }
+            onSignOut={
+              () => {
+                setShowLabel(false)
+              }
+            }
           />
         </div>
 
