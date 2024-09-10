@@ -9,7 +9,6 @@ export function Demo() {
 
   const { isVerified } = useVerified({})
 
-
   return (
     <>
       <div className="text-center">
@@ -26,8 +25,9 @@ export function Demo() {
       <div>
         <div className="centered">
           <SignInButton
+            hideSignOut={true}
             onSuccess={
-              async ({ fid, username }) => {
+               async ({ fid, username }) => {
                 setShowLabel(true)
                 setVerifiedHuman(await isVerified(Number(fid)))
               }
