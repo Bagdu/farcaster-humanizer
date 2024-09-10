@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import { VerificationLevel, IDKitWidget, solidityEncode } from '@worldcoin/idkit';
 import { WORLDCOIN_APP_ID } from '../settings';
 import Button from "react-bootstrap/Button";
-import useVerifyProof from "../hooks/UseVerifyProof";
+import {verifyProof, checkVerifyProof} from "../ethereum/verify";
 import { SignInButton} from "@farcaster/auth-kit";
 
 import "./verify.css"
@@ -12,7 +12,6 @@ export function Verify() {
   const [loading, setLoading] = useState(false);
   const [fid, setFid] = useState(0)
 
-  const { verifyProof, checkVerifyProof } = useVerifyProof();
 
 
   const checkVerification = async () => {
