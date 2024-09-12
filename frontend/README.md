@@ -1,8 +1,8 @@
 # Farcaster humanizer frontend
 
 ## Requirements
-- node.js v18.18.2
-- npm 9.8.1
+- node.js v20.15.0
+- npm 10.7.0
 - Metamask extension for your browser (Optimism Sepolia network)
 
 ## Run
