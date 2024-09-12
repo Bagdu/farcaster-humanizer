@@ -51,7 +51,7 @@ export function Demo() {
           <div hidden={verifiedHuman}>
             <Image src="/images/not-verified.jpg" height={28} className="me-lg-3" />
             <label className="label">
-              not verified human
+              human not verified
             </label>
           </div>
         </div>
