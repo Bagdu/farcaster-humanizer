@@ -127,12 +127,12 @@ export function Verify() {
 
       <div className="linkDiv">
         <div className="text-center">
-          <a href="https://idarsavelidze.notion.site/Farcaster-Humanizer-101-e6dbd56ba53f455e9c15f74ff4edb7c6" className="link">
+          <a href="https://idarsavelidze.notion.site/Farcaster-Humanizer-101-e6dbd56ba53f455e9c15f74ff4edb7c6" target="_blank" className="link">
             How Farcaster Humanizer works ?
           </a>
         </div>
         <div className="text-center secondLinkDiv">
-          <a href="https://www.npmjs.com/package/farcaster-humanizer" className="link">
+          <a href="https://www.npmjs.com/package/farcaster-humanizer" target="_blank" className="link">
             Add Farcaster Humanizer to your application
           </a>
         </div>
