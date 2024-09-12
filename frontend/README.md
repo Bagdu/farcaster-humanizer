@@ -15,8 +15,8 @@ npm run start
 
 Open http://localhost:3000 in your browser.
 
-You need to have Optimism Goerli network in your Metamask extension.
-- Network name: Optimism Goerli
+You need to have Sepolia Optimism network in your Metamask extension.
+- Network name: Optimism Sepolia
 - RPC URL: https://sepolia.optimism.io
 - Chain ID: 11155420
 - Symbol: ETH
