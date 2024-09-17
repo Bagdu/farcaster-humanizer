@@ -26,7 +26,6 @@
     "@types/react": "^18.2.43"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
   },
   "dependencies": {
     "viem": "^2.21.1"
