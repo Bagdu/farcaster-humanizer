@@ -137,19 +137,6 @@ export function Verify() {
             Add Farcaster Humanizer to your application
           </a>
         </div>
-        <div className="text-center thirdDiv">
-            <p>
-              In case of any questions feel free to contact us on:
-            </p>
-            <p>
-              Farcaster: @kensei
-            </p>
-
-            <p>
-              Discord: @digital.kensei, @giorgibagdavadze
-            </p>
-        </div>
-
       </div>
     </>
   );
