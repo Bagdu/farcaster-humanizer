@@ -12,3 +12,5 @@ import { useVerified } from "farcaster-humanizer"
 const { isVerified } = useVerified({})
 const isVerified = await isVerified(your_fid)
 ```
+
+github url: https://github.com/Bagdu/farcaster-humanizer/tree/main/farcaster-humanizer

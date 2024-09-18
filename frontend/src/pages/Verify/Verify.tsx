@@ -127,8 +127,9 @@ export function Verify() {
 
       <div className="linkDiv">
         <div className="text-center">
-          <a href="https://idarsavelidze.notion.site/Farcaster-Humanizer-101-e6dbd56ba53f455e9c15f74ff4edb7c6" target="_blank" className="link">
-            How Farcaster Humanizer works ?
+          <a href="https://idarsavelidze.notion.site/Farcaster-Humanizer-101-e6dbd56ba53f455e9c15f74ff4edb7c6"
+             target="_blank" className="link">
+            How Farcaster Humanizer works?
           </a>
         </div>
         <div className="text-center secondLinkDiv">
@@ -136,6 +137,19 @@ export function Verify() {
             Add Farcaster Humanizer to your application
           </a>
         </div>
+        <div className="text-center thirdDiv">
+            <p>
+              In case of any questions feel free to contact us on:
+            </p>
+            <p>
+              Farcaster: @kensei
+            </p>
+
+            <p>
+              Discord: @digital.kensei, @giorgibagdavadze
+            </p>
+        </div>
+
       </div>
     </>
   );
