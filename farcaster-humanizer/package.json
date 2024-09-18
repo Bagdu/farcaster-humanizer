@@ -1,11 +1,15 @@
 {
   "name": "farcaster-humanizer",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "",
   "main": "dist/index.js",
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bagdu/farcaster-humanizer"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
