@@ -1,10 +1,10 @@
-import { viemConnector } from '../ethereum/viemConnector';
+import { viemConnector } from "../ethereum/viemConnector";
 
-export type UseVerifiedArgs =  {
-  rpcUrl?: string
+export type UseVerifiedArgs = {
+  rpcUrl?: string;
 };
 
-export function useVerified(args: UseVerifiedArgs) {
-  const { isVerified } = viemConnector({rpcUrl: args.rpcUrl})
+export function useVerified(args?: UseVerifiedArgs) {
+  const { isVerified } = viemConnector({ rpcUrl: args?.rpcUrl });
   return { isVerified };
 }

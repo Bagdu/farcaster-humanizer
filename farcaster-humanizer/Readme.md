@@ -9,7 +9,7 @@ $ npm install farcaster-humanizer
 
 ```
 import { useVerified } from "farcaster-humanizer"
-const { isVerified } = useVerified({})
+const { isVerified } = useVerified()
 const isVerified = await isVerified(your_fid)
 ```
 
